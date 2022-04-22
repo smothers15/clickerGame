@@ -1,0 +1,36 @@
+.row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-row{
+    display:flex;
+    justify-content: space-around;
+
+}
+
+.button{
+    width: 120px;
+    height: 60px;
+    border-radius: 3px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: crimson;
+    color: white;
+}
+
+.score{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.content{
+    display:flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.home{
+    width: 800px;
+
+}

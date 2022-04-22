@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clicker</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        img{
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <div class="home">
+        <div class="button-row">
+            <img src = 'https://cdn4.iconfinder.com/data/icons/smiley-2/54/smiley-face-avatar-happy-plain-512.png'>
+
+        </div>
+        <div class="button-row">
+            <div class="score" style="padding-top: 50px" id="score">Score: 0</div>
+        </div>
+        <div class="button-row" style="padding-top: 250px;">
+            <button class="button" id="clicker">Click Me</button>
+        </div>
+    </div>
+</div>
+<script>
+    const avatar = document.querySelector('img');
+    const clicker = document.getElementById('clicker');
+    const label = document.getElementById('score');
+    let score = 0;
+    clicker.addEventListener('click', function(){
+        score++;
+        label.textContent= `Score: ${score}`;
+        if(score>5){
+            clicker.textContent='Click'
+        }
+        if(score>50){
+            avatar.src='https://cdn1.iconfinder.com/data/icons/smileys-emoticons-outlines-with-medical-mask-inclu/96/SMILEY_COOL_FACE_outline-512.png';
+        }
+        if(score>100){
+            avatar.src='https://cdn4.iconfinder.com/data/icons/aami-flat-smileys/64/smile-40-512.png';
+        }
+    })
+</script>
+</body>
+</html>
