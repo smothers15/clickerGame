@@ -8,6 +8,9 @@
         img{
             width: 100px;
         }
+        .hidden{
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -17,11 +20,26 @@
             <img src = 'https://cdn4.iconfinder.com/data/icons/smiley-2/54/smiley-face-avatar-happy-plain-512.png'>
 
         </div>
-        <div class="button-row">
-            <div class="score" style="padding-top: 50px" id="score">Score: 0</div>
+        <div  style="display: flex; justify-content: space-around">
+            <div>
+                <div class="score" style="padding-top: 50px" id="score">Score: 0</div>
+                <p id="scoreIncreaseClick">+1 per click</p>
+            </div>
+
         </div>
         <div class="button-row" style="padding-top: 250px;">
             <button class="button" id="clicker">Click Me</button>
+        </div>
+        <div id="shopDiv" class="hidden" style="padding-top: 120px">
+            <p id="shopIntro" style="justify-content: center; font-size:20px">You unlocked the shop!</p>
+            <p id ='p'>Shop: </p>
+            <div class="button-row">
+                <button class="shopButton" id="item1">+3 Per Click<br> Cost: 70 Clicks</button>
+                <button class="shopButton" id="item2">+5 Per Click<br> Cost: 150 Clicks</button>
+                <button class="shopButton" id="item3">+10 Per Click<br> Cost: 300 Clicks</button>
+                <button class="shopButton" id="item4">x2 Per Click<br> Cost: 500 Clicks</button>
+            </div>
+            <button id="reset" class="hidden">Restart</button>
         </div>
     </div>
 </div>
@@ -29,19 +47,112 @@
     const avatar = document.querySelector('img');
     const clicker = document.getElementById('clicker');
     const label = document.getElementById('score');
+    const shop = document.getElementById('shopDiv');
+    const shopIntro = document.getElementById('shopIntro');
+    const two = document.getElementById('item1');
+    const five = document.getElementById('item2');
+    const ten = document.getElementById('item3');
+    const double = document.getElementById('item4');
+    const shopLabel = document.getElementById('p');
+    const reset = document.getElementById('reset');
+    const plus = document.getElementById('scoreIncreaseClick');
+    let double2 = false;
     let score = 0;
+    let scoreIncrease = 1;
+    let clicks=0;
     clicker.addEventListener('click', function(){
-        score++;
+        console.log(score);
+        plus.textContent=`+${scoreIncrease} per click`;
+        clicks++;
+        if(double2){
+            scoreIncrease=score+score;
+            score=scoreIncrease;
+        }else{
+            score = score + scoreIncrease;
+        }
+
         label.textContent= `Score: ${score}`;
         if(score>5){
             clicker.textContent='Click'
         }
-        if(score>50){
+        if(score>500){
+            avatar.src='https://image.pngaaa.com/790/20790-middle.png';
+        }
+        if(score>1000){
             avatar.src='https://cdn1.iconfinder.com/data/icons/smileys-emoticons-outlines-with-medical-mask-inclu/96/SMILEY_COOL_FACE_outline-512.png';
         }
-        if(score>100){
+        if(score>10000){
             avatar.src='https://cdn4.iconfinder.com/data/icons/aami-flat-smileys/64/smile-40-512.png';
         }
+        if(score>5){
+            shop.classList.remove('hidden');
+        }
+        if(score>10){
+            shopIntro.classList.add('hidden');
+        }
+
+        if(score>1000000000){
+            shopIntro.classList.remove('hidden');
+            reset.classList.remove('hidden');
+            shopIntro.textContent='You Won, you reached 1 billion clicks, restart to play again with a higher click rate.';
+            clicker.classList.add('hidden');
+            two.classList.add('hidden');
+            five.classList.add('hidden');
+            ten.classList.add('hidden');
+            double.classList.add('hidden');
+            shopLabel.classList.add('hidden');
+        }
+    });
+
+    two.addEventListener('click', function(){
+
+        if((score-10)>-1){
+            scoreIncrease=scoreIncrease+2;
+            score=score-10;
+            label.textContent= `Score: ${score}`;
+        }
+    });
+    five.addEventListener('click', function(){
+
+        if((score-20)>-1){
+            scoreIncrease=scoreIncrease+5;
+            score=score-20;
+            label.textContent= `Score: ${score}`;
+        }
+    });
+    ten.addEventListener('click', function(){
+
+        if((score-30)>-1){
+            scoreIncrease=scoreIncrease+10;
+            score=score-30;
+            label.textContent= `Score: ${score}`;
+        }
+    })
+    double.addEventListener('click', function(){
+
+        if((score-40)>-1){
+            double2=true;
+            score=(score+1)-40;
+            label.textContent= `Score: ${score}`;
+        }
+    })
+
+    reset.addEventListener('click',function(){
+        double2=false;
+        scoreIncrease=Math.round(score/clicks);
+        console.log(scoreIncrease);
+        score=0;
+        label.textContent= `Score: ${score}`;
+
+        plus.textContent=`+${scoreIncrease} per click`;
+        clicker.classList.remove('hidden');
+        two.classList.remove('hidden');
+        five.classList.remove('hidden');
+        ten.classList.remove('hidden');
+        double.classList.remove('hidden');
+        shopLabel.classList.remove('hidden');
+        shopIntro.classList.add('hidden');
+        reset.classList.add('hidden');
     })
 </script>
 </body>

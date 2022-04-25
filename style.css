@@ -28,9 +28,35 @@
     display:flex;
     justify-content: space-around;
     padding: 20px;
+
 }
 
 .home{
     width: 800px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 3px;
+}
 
+body{
+    background-color: lightgrey;
+}
+
+p{
+    font-weight: bold;
+}
+
+.shopButton{
+    width: 170px;
+    height: 50px;
+    border-radius: 3px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: lightgray;
+    color: black;
+    justify-content: space-between;
+}
+
+.shop{
+    padding-top: 120px;
 }
